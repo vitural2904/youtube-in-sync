@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>YouTube In Sync</title><link rel="stylesheet" href="popup.css"></head>
+<body>
+  <h1>YouTube In Sync</h1>
+  <p id="status" role="status" aria-live="polite">Đang đọc trạng thái…</p>
+  <p id="details"></p>
+  <label for="endpoint">Máy chủ</label>
+  <input id="endpoint" type="url" value="ws://127.0.0.1:8787/ws" spellcheck="false">
+  <button id="grant" type="button">Cho phép máy chủ HTTPS</button>
+  <button id="create" type="button">Tạo phòng với video này</button>
+  <label for="room">Mã phòng</label>
+  <input id="room" autocomplete="off" spellcheck="false" maxlength="32">
+  <button id="join" type="button">Vào phòng với video này</button>
+  <button id="copy" type="button" hidden>Sao chép mã phòng</button>
+  <button id="leave" type="button" hidden>Ngừng theo nhóm / Rời phòng</button>
+  <p id="error" role="alert"></p>
+  <script src="popup.js"></script>
+</body></html>
