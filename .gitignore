@@ -1,0 +1,45 @@
+# Dependencies and caches
+node_modules/
+.npm-cache/
+.npm/
+__pycache__/
+*.py[cod]
+
+# Local sessions, browser profiles, recordings and generated artifacts
+/output/
+/dist/
+.playwright-cli/
+.playwright/
+playwright-report/
+test-results/
+coverage/
+*.log
+*.har
+*.trace
+*.crx
+*.zip
+
+# Credentials and local configuration
+.env
+.env.*
+!.env.example
+.npmrc
+*.pem
+*.key
+*.p12
+*.pfx
+credentials*.json
+*service-account*.json
+.aws/
+.ssh/
+.codex/
+.agents/
+
+# Editor and operating-system files
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.swp
+*.tmp
