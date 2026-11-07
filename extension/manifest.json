@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "YouTube In Sync",
+  "version": "0.1.0",
+  "description": "Đồng bộ một video YouTube đã chọn với phòng riêng.",
+  "minimum_chrome_version": "116",
+  "permissions": ["activeTab", "scripting", "storage"],
+  "host_permissions": ["https://www.youtube.com/*", "http://127.0.0.1:8787/*"],
+  "optional_host_permissions": ["https://*/*"],
+  "background": { "service_worker": "background.js" },
+  "action": { "default_popup": "popup.html", "default_title": "YouTube In Sync" },
+  "content_security_policy": { "extension_pages": "script-src 'self'; object-src 'none'" }
+}

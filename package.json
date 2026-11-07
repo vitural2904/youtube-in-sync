@@ -1,0 +1,24 @@
+{
+  "name": "youtube-in-sync",
+  "version": "0.1.0",
+  "description": "Automatic YouTube watch-party synchronization with a Chromium extension and lightweight coordinator.",
+  "license": "MIT",
+  "repository": { "type": "git", "url": "https://github.com/vitural2904/youtube-in-sync.git" },
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node server/index.js",
+    "test": "node --test test/*.test.js",
+    "check": "node scripts/check.js",
+    "package:extension": "python scripts/package-extension.py"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "ws": "8.22.1"
+  },
+  "devDependencies": {
+    "@playwright/cli": "^0.1.23"
+  }
+}
