@@ -14,7 +14,7 @@ continuously correct drift. Manual scene alignment is removed.
 
 ## Validation and limits
 
-26 JavaScript tests and one packaging test pass locally. A two-profile Thorium test exercised
+28 JavaScript tests and one packaging test pass locally. A two-profile Thorium test exercised
 automatic joining from a 60-second lag. Another local trace converged to six rounded samples
 around 24ms of media timeline error after a deliberately induced small backward seek.
 

@@ -96,3 +96,14 @@ test('target compensates time spent in worker-to-player delivery', () => {
   const b = browser(); b.target({ position: 110, at: 1009000 }); b.tick();
   assert.equal(b.v.currentTime, 111.25);
 });
+test('ending control restores a non-unit host rate instead of retaining its correction', () => {
+  for (const action of ['stop', 'suspend', 'ads', 'stale', 'invalid-mapping']) {
+    const b = browser(); b.target({ rate: 1.5 }); b.tick();
+    assert.ok(b.v.playbackRate > 1.5);
+    if (action === 'ads') { b.ad(true); b.tick(); }
+    else if (action === 'stale') b.tick(4000);
+    else if (action === 'invalid-mapping') b.send('mapping', { valid: false });
+    else b.send(action);
+    assert.equal(b.v.playbackRate, 1.5, action);
+  }
+});

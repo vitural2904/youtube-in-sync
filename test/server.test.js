@@ -90,6 +90,17 @@ test('untrusted browser origins denied', async t => {
   const error = await new Promise(resolve => ws.once('error', resolve));
   assert.match(error.message, /403/);
 });
+test('rejected origins cannot exhaust address buckets and block existing clients', async t => {
+  const app = createCoordinator();
+  const address = await app.listen(0); t.after(() => app.close());
+  const url = `ws://127.0.0.1:${address.port}/ws`;
+  await host(url);
+  for (let i = 0; i < 10005; i++) {
+    app.httpServer.emit('upgrade', { url: '/ws', headers: { origin: 'https://evil.example' },
+      socket: { remoteAddress: `rejected-address-${i}` } }, { end() {} }, Buffer.alloc(0));
+  }
+  assert.equal((await host(url)).welcome.role, 'host');
+});
 test('oversized payload closes connection; flood is bounded', async t => {
   const url = await setup(t), h = await host(url);
   const closed = new Promise(resolve => h.ws.once('close', code => resolve(code)));

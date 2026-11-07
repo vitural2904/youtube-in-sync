@@ -82,9 +82,10 @@ python scripts/package-extension.py
 npm audit --omit=dev
 ```
 
-26 JavaScript tests cover clock math, prediction, hysteresis/tanh limits, target delivery age,
+28 JavaScript tests cover clock math, prediction, hysteresis/tanh limits, target delivery age,
 automatic live mapping, invalid/missing origins, stale mappings, ad recovery, navigation,
-bindings, disconnect/leave, room authorization, replay, invalid payloads, flooding, and expiry.
+bindings, disconnect/leave (including non-unit host-rate restoration), room authorization,
+replay, invalid payloads, flooding, rejected-origin address exhaustion, and expiry.
 One Python packaging test checks repeatability, an explicit ZIP allowlist, archive integrity,
 and exclusion of an intentionally added local-secret fixture. No personal data is used.
 

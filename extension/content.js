@@ -3,12 +3,16 @@
   globalThis.__syncDuoInstalled = true;
   let binding = null, target = null, player = null, source = null, mapping = null;
   let mappedAt = 0, correcting = false, lastSeek = -Infinity, lastTarget = 0;
+  let correctionBase = null, appliedRate = null;
   let status = 'Chưa gắn video';
   const videoId = () => {
     const u = new URL(location.href);
     return u.origin === 'https://www.youtube.com' && u.pathname === '/watch' ? u.searchParams.get('v') : null;
   };
-  function resetRate() { if (player && Math.abs(player.playbackRate - 1) < 0.05) player.playbackRate = 1; }
+  function resetRate() {
+    if (player && correctionBase !== null && Math.abs(player.playbackRate - appliedRate) < 1e-6) player.playbackRate = correctionBase;
+    correctionBase = appliedRate = null;
+  }
   function invalidate() { resetRate(); mapping = null; target = null; correcting = false; }
   function stop() { invalidate(); binding = null; status = 'Đã ngừng đồng bộ'; }
   function sample() {
@@ -100,7 +104,9 @@
     if (fix.action === 'seek' && performance.now() - lastSeek > 3000) {
       player.currentTime = wanted; lastSeek = performance.now(); correcting = false; resetRate(); status = 'Đang đồng bộ';
     } else if (performance.now() - lastSeek > 1200) {
-      player.playbackRate = Math.max(0.25, Math.min(2, target.rate * fix.rate)); correcting = fix.action === 'rate';
+      correctionBase = Math.max(0.25, Math.min(2, target.rate));
+      appliedRate = Math.max(0.25, Math.min(2, target.rate * fix.rate));
+      player.playbackRate = appliedRate; correcting = fix.action === 'rate';
       status = correcting ? `Đang chỉnh (${error.toFixed(2)} giây)` : fix.action === 'hold' ? 'Đã đồng bộ' : 'Đang đồng bộ';
     }
   }, 100);

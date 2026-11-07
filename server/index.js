@@ -49,14 +49,15 @@ export function createCoordinator({ allowedOrigins = [], maxRooms = 100, ttl = 2
     const origin = req.headers.origin;
     const permitted = allowedOrigins.length ? allowedOrigins.includes(origin)
       : /^chrome-extension:\/\/[a-p]{32}$/.test(origin ?? '');
+    const reject = () => socket.end('HTTP/1.1 403 Forbidden\r\nConnection: close\r\n\r\n');
+    if (sockets.size >= 200 || req.url !== '/ws' || !permitted) { reject(); return; }
     const address = req.socket.remoteAddress;
     let bucket = attempts.get(address);
+    if (!bucket && attempts.size >= 10000) { reject(); return; }
     if (!bucket || Date.now() - bucket.at > 60000) {
       bucket = { at: Date.now(), count: 0 }; attempts.set(address, bucket);
     }
-    if (attempts.size > 10000 || ++bucket.count > 60 || sockets.size >= 200 || req.url !== '/ws' || !permitted) {
-      socket.end('HTTP/1.1 403 Forbidden\r\nConnection: close\r\n\r\n'); return;
-    }
+    if (++bucket.count > 60) { reject(); return; }
     wss.handleUpgrade(req, socket, head, ws => wss.emit('connection', ws));
   });
   wss.on('connection', ws => {

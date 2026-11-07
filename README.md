@@ -164,7 +164,7 @@ Rooms and members use in-memory maps. Clock samples use a fixed-length recent-sa
 | Guest started 60 seconds behind | Join triggered automatic alignment | One live-video demonstration |
 | Guest moved 250 ms backward | Error briefly reached 367 ms during buffering, then fell to 76 ms across twelve samples | Approximately one-second sampling; one trace |
 | Later settled window | Six samples rounded to approximately 24 ms each | Roughly 0.5-second sampling; rounding does not imply zero jitter |
-| Automated checks | 26 JavaScript tests and one packaging test | Controlled-player tests complement real-browser smoke tests |
+| Automated checks | 28 JavaScript tests and one packaging test | Controlled-player tests complement real-browser smoke tests |
 
 Error is predicted host position minus guest canonical position **at the guest observation time**. It is not acoustic or photon-to-photon delay. No geographical, load, packet-loss, or long-duration benchmark has been completed. See [method and reproduction notes](docs/validation.md).
 
