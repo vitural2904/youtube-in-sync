@@ -23,6 +23,7 @@ fig.suptitle("Initial local smoke measurement — two Thorium profiles, one mach
 destination = root / "docs/assets/initial-benchmark.svg"
 destination.parent.mkdir(exist_ok=True)
 fig.savefig(destination, metadata={"Date": None, "Description": "Recorded local media timeline errors; not speaker output latency or WAN performance."})
+destination.write_text("\n".join(line.rstrip() for line in destination.read_text(encoding="utf-8").splitlines()) + "\n", encoding="utf-8")
 (root / "output").mkdir(exist_ok=True)
 fig.savefig(root / "output/benchmark-preview.png", dpi=150)
 print(destination.relative_to(root))
