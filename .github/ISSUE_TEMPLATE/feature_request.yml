@@ -1,0 +1,16 @@
+name: Feature proposal
+description: Discuss scope before starting implementation on a separate branch.
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem and proposed behavior
+    validations:
+      required: true
+  - type: textarea
+    id: approach
+    attributes:
+      label: Approach, alternatives, and validation
+      description: Describe the tradeoff, expected benefit, and how to test it.
+    validations:
+      required: true

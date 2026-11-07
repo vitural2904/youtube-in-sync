@@ -1,0 +1,22 @@
+name: Bug report
+description: Report a reproducible behavior problem. Use private reporting for security issues.
+body:
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Expected and actual behavior
+      description: Explain what should happen and what happened.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Reproduction steps
+      description: Include browser/version, extension version, video type, and local or remote coordinator. Do not include secrets.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Sanitized evidence
+      description: Optional screenshots or timing samples. Remove private room codes, credentials, and personal data.

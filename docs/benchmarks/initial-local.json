@@ -1,0 +1,11 @@
+{
+  "date": "2026-11-07",
+  "environment": { "os": "Windows", "browser": "Thorium 138", "node": "22.19.0", "transport": "loopback WebSocket", "participants": 2, "profiles": "fresh independent profiles on one physical machine" },
+  "metric": "Canonical guest media timeline error relative to the host anchor, evaluated at the guest observation timestamp; not acoustic output latency",
+  "transient_error_ms": [292, 367, 336, 306, 276, 245, 215, 184, 155, 127, 100, 76],
+  "transient_sampling": "Approximately one second apart; guest deliberately sought backward by 250ms; buffering briefly increased the error",
+  "settled_error_ms": [24, 24, 24, 24, 24, 24],
+  "settled_sampling": "Later samples, approximately 0.5 seconds apart; rounded to nearest millisecond; intervening samples not recorded",
+  "automatic_join_trial": { "induced_lag_seconds": 60, "result": "Guest joined and automatically sought to the host timeline; no manual alignment", "guest_player_to_media_offset_seconds": 291630 },
+  "limits": ["One local demonstration, not a statistical performance study", "No WAN, packet-loss, load, long-duration or acoustic latency benchmark", "Rounded settled values do not imply zero jitter", "Internal YouTube APIs may change"]
+}
